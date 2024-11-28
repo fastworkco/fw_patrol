@@ -225,6 +225,8 @@ class EnterTextRequest {
   IOSSelector? iosSelector;
   late KeyboardBehavior keyboardBehavior;
   int? timeoutMillis;
+  double? dx;
+  double? dy;
 }
 
 class SwipeRequest {
@@ -296,6 +298,10 @@ class SetLocationAccuracyRequest {
   late SetLocationAccuracyRequestLocationAccuracy locationAccuracy;
 }
 
+class MarkAppAppServiceReadyRequest {
+  int? port;
+}
+
 abstract class NativeAutomator<IOSServer, AndroidServer, DartClient> {
   void initialize();
   void configure(ConfigureRequest request);
@@ -354,7 +360,7 @@ abstract class NativeAutomator<IOSServer, AndroidServer, DartClient> {
   void debug();
 
   // TODO(bartekpacia): Move this RPC into a new PatrolNativeTestService service because it doesn't fit here
-  void markPatrolAppServiceReady();
+  void markPatrolAppServiceReady(MarkAppAppServiceReadyRequest request);
 }
 
 enum IOSElementType {

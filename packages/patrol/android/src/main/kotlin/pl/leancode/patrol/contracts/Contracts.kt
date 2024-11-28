@@ -557,6 +557,12 @@ class Contracts {
     fun hasTimeoutMillis(): Boolean {
       return timeoutMillis != null
     }
+    fun hasDx(): Boolean {
+      return dx != null
+    }
+    fun hasDy(): Boolean {
+      return dy != null
+    }
   }
 
   data class SwipeRequest (
@@ -654,5 +660,13 @@ class Contracts {
   data class SetLocationAccuracyRequest (
     val locationAccuracy: SetLocationAccuracyRequestLocationAccuracy
   )
+
+  data class MarkAppAppServiceReadyRequest (
+    val port: Long? = null
+  ){
+    fun hasPort(): Boolean {
+      return port != null
+    }
+  }
 
 }

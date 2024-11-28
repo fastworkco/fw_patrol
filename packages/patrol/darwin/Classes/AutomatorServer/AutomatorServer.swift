@@ -5,9 +5,9 @@
   final class AutomatorServer: NativeAutomatorServer {
     private let automator: Automator
 
-    private let onAppReady: (Bool) -> Void
+    private let onAppReady: (Bool, Int) -> Void
 
-    init(automator: Automator, onAppReady: @escaping (Bool) -> Void) {
+    init(automator: Automator, onAppReady: @escaping (Bool, Int) -> Void) {
       self.automator = automator
       self.onAppReady = onAppReady
     }
@@ -155,8 +155,8 @@
             inApp: request.appId,
             dismissKeyboard: request.keyboardBehavior == .showAndDismiss,
             withTimeout: request.timeoutMillis.map { TimeInterval($0 / 1000) },
-            dx: request.dx,
-            dy: request.dy
+            dx: request.dx ?? 0.5,
+            dy: request.dy ?? 0.5
           )
         } else if let selector = request.selector {
           try automator.enterText(
@@ -165,8 +165,8 @@
             inApp: request.appId,
             dismissKeyboard: request.keyboardBehavior == .showAndDismiss,
             withTimeout: request.timeoutMillis.map { TimeInterval($0 / 1000) },
-            dx: request.dx,
-            dy: request.dy
+            dx: request.dx ?? 0.5,
+            dy: request.dy ?? 0.5
           )
         } else if let iosSelector = request.iosSelector {
           try automator.enterText(
@@ -175,8 +175,8 @@
             inApp: request.appId,
             dismissKeyboard: request.keyboardBehavior == .showAndDismiss,
             withTimeout: request.timeoutMillis.map { TimeInterval($0 / 1000) },
-            dx: request.dx,
-            dy: request.dy
+            dx: request.dx ?? 0.5,
+            dy: request.dy ?? 0.5
           )
         } else {
           throw PatrolError.internal("enterText(): neither index nor selector are set")
@@ -411,8 +411,8 @@
       }
     }
 
-    func markPatrolAppServiceReady() throws {
-      onAppReady(true)
+    func markPatrolAppServiceReady(request: MarkAppAppServiceReadyRequest) throws {
+        onAppReady(true, request.port!)
     }
   }
 

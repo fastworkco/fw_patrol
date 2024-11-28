@@ -587,6 +587,8 @@ EnterTextRequest _$EnterTextRequestFromJson(Map<String, dynamic> json) =>
       keyboardBehavior:
           $enumDecode(_$KeyboardBehaviorEnumMap, json['keyboardBehavior']),
       timeoutMillis: (json['timeoutMillis'] as num?)?.toInt(),
+      dx: (json['dx'] as num?)?.toDouble(),
+      dy: (json['dy'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$EnterTextRequestToJson(EnterTextRequest instance) =>
@@ -599,6 +601,8 @@ Map<String, dynamic> _$EnterTextRequestToJson(EnterTextRequest instance) =>
       'iosSelector': instance.iosSelector,
       'keyboardBehavior': _$KeyboardBehaviorEnumMap[instance.keyboardBehavior]!,
       'timeoutMillis': instance.timeoutMillis,
+      'dx': instance.dx,
+      'dy': instance.dy,
     };
 
 const _$KeyboardBehaviorEnumMap = {
@@ -787,3 +791,15 @@ const _$SetLocationAccuracyRequestLocationAccuracyEnumMap = {
   SetLocationAccuracyRequestLocationAccuracy.coarse: 'coarse',
   SetLocationAccuracyRequestLocationAccuracy.fine: 'fine',
 };
+
+MarkAppAppServiceReadyRequest _$MarkAppAppServiceReadyRequestFromJson(
+        Map<String, dynamic> json) =>
+    MarkAppAppServiceReadyRequest(
+      port: (json['port'] as num?)?.toInt(),
+    );
+
+Map<String, dynamic> _$MarkAppAppServiceReadyRequestToJson(
+        MarkAppAppServiceReadyRequest instance) =>
+    <String, dynamic>{
+      'port': instance.port,
+    };
